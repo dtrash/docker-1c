@@ -8,7 +8,7 @@ FROM debian:9.0 as system
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt update \
     && apt install -y --no-install-recommends --allow-unauthenticated \
-        supervisor rxvt curl ca-certificates \
+        supervisor rxvt-unicode-ml curl ca-certificates \
         xvfb x11vnc fvwm locales \
     && apt autoclean -y \
     && apt autoremove -y \
@@ -47,7 +47,7 @@ RUN cd /tmp \
     && mkdir -p /root/.1cv8/1C/1cv8/conf/
 
 
-LABEL maintainer="dtrash"
+LABEL maintainer="Sam A. Martyshin"
 
 COPY rootfs /
 

@@ -43,8 +43,7 @@ RUN cd /tmp \
     && apt install -y --allow-unauthenticated ./common-*.deb \
         ./server-*.deb \
         ./client-*.deb \
-    && cd /tmp \
-    && rm -rf /tmp/pack \
+    && rm -rf /tmp/* \
     && mkdir -p /root/.1cv8/1C/1cv8/conf/
 
 
@@ -52,7 +51,7 @@ LABEL maintainer="dtrash"
 
 COPY rootfs /
 
-EXPOSE 80
+EXPOSE 5900
 WORKDIR /root
 ENV RESOLUTION=1440x900
 

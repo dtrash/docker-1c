@@ -1,2 +1,4 @@
 ONEC_USERNAME=ИмяПользователя_users.v8.1c.ru
 ONEC_PASSWORD=ПарольПользователя_users.v8.1c.ru
+OSCRIPT_VER=1.5.0
+ONEGET_VER=v0.2.3

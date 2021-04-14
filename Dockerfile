@@ -3,10 +3,12 @@ FROM debian:9.0 as system
 # built-in packages
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update \
+RUN echo "deb http://http.debian.net/debian/ stretch contrib non-free" >> /etc/apt/sources.list \
+    && apt-get update \
     && apt-get install -y --no-install-recommends --allow-unauthenticated \
         supervisor curl rxvt-unicode-ml ca-certificates \
-        xvfb xauth x11vnc fvwm locales \
+        xvfb xauth x11vnc fvwm locales dbus-x11 at-spi2-core \
+        ttf-mscorefonts-installer \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/* \
     && localedef -i ru_RU -c -f UTF-8 -A /usr/share/locale/locale.alias ru_RU.UTF-8
@@ -45,11 +47,14 @@ RUN cd /tmp && chmod +x oneget \
     && apt-get install -y --allow-unauthenticated ./downloads/developmenttools10/${EDT_VERSION}/bellsoft*.deb \
     && tar xzf ./downloads/developmenttools10/${EDT_VERSION}/1c_edt*.tar.gz \
     && ./1ce-installer-cli install --ignore-hardware-checks \
-    && echo "alias ring=/opt/1C/1CE/components/1c-enterprise-ring*/ring" > /root/.bashrc \
+    #&& echo "alias ring=/opt/1C/1CE/components/1c-enterprise-ring*/ring" > /root/.bashrc \
     && rm -rf /tmp/* \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean -y \
+    && mv $(dirname $(find /opt/1C/1CE -name ring)) /opt/1C/1CE/components/1c-enterprise-ring \
     && mkdir -p /root/.1cv8/1C/1cv8/conf/
+
+ENV PATH="$PATH:/opt/1C/1CE/components/1c-enterprise-ring"
 
 # Install OScript.
 FROM system_1C as system_OScript_1C

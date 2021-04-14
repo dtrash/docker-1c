@@ -34,4 +34,6 @@ sed -i -e "s|%USER%|$USER|" -e "s|%HOME%|$HOME|" /etc/supervisor/conf.d/supervis
 PASSWORD=
 HTTP_PASSWORD=
 
-exec /bin/tini -- supervisord -n -c /etc/supervisor/supervisord.conf
+# exec /bin/tini -- supervisord -n -c /etc/supervisor/supervisord.conf&
+supervisord -c /etc/supervisor/supervisord.conf
+

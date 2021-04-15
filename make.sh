@@ -4,7 +4,7 @@ if [ -f ".env" ]; then
     export $(grep -v '^#' .env | xargs)
 fi
 
-IMAGE_NAME=${1:-"gitlab.lan:5050/root/testci/1c_image_client"}
+IMAGE_NAME=${1:-"gitlab.mac.lan:5050/root/testci/1c_image_client"}
 
 env=()
 while IFS= read -r line || [[ "$line" ]]; do
